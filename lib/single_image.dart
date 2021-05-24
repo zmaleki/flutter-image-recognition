@@ -23,7 +23,8 @@ analyseFunction(String imageName) async {
     var detectedText = "";
     for (var i = 0; i < body['details'].length; i++) {
       if (body['details'][i]['Type'] == 'LINE') {
-        detectedText = detectedText + body['details'][i]['DetectedText'] + " ";
+        detectedText =
+            detectedText + body['details'][i]['DetectedText'] + " \n";
       }
     }
     // var firstItem = body['details'][0];
@@ -49,7 +50,7 @@ class RecognitionResult extends StatefulWidget {
 }
 
 class _RecognitionResultState extends State<RecognitionResult> {
-  String _result = "initializing...";
+  String _result = "initializing...\n";
   final imageName;
   _RecognitionResultState({
     this.imageName,
@@ -59,7 +60,8 @@ class _RecognitionResultState extends State<RecognitionResult> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Second Route"),
+          title: Text("Analyse your image"),
+          backgroundColor: Colors.deepPurple[400],
         ),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Row(
@@ -75,12 +77,42 @@ class _RecognitionResultState extends State<RecognitionResult> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(_result),
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 5.0,
+                    right: 5.0,
+                  ),
+                  child: Text(
+                    _result,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 10,
+                    softWrap: true,
+                  ),
+                ),
+              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10.0,
+                  right: 10.0,
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    // Navigate back to first route when tapped.
+                  },
+                  child: Text('Go back'),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.deepPurple[400]!),
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(
                   left: 10.0,
@@ -94,19 +126,10 @@ class _RecognitionResultState extends State<RecognitionResult> {
                     });
                   },
                   child: Text('Analyse'),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 10.0,
-                  right: 10.0,
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    // Navigate back to first route when tapped.
-                  },
-                  child: Text('Go back'),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.deepPurple[400]!),
+                  ),
                 ),
               ),
             ],
