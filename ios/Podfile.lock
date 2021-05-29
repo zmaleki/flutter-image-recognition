@@ -1,4 +1,54 @@
 PODS:
+  - Amplify (1.9.3):
+    - Amplify/Default (= 1.9.3)
+  - Amplify/Default (1.9.3)
+  - amplify_auth_cognito (0.0.1):
+    - Amplify
+    - amplify_core
+    - AmplifyPlugins/AWSCognitoAuthPlugin
+    - Flutter
+    - ObjectMapper
+  - amplify_core (0.0.1):
+    - Flutter
+  - amplify_flutter (0.0.1):
+    - Amplify
+    - amplify_core
+    - AmplifyPlugins/AWSCognitoAuthPlugin
+    - AWSPluginsCore
+    - Flutter
+  - amplify_storage_s3 (0.0.1):
+    - Amplify
+    - amplify_core
+    - AmplifyPlugins/AWSS3StoragePlugin
+    - Flutter
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.9.3):
+    - AWSAuthCore (~> 2.24.0)
+    - AWSCognitoIdentityProvider (~> 2.24.0)
+    - AWSCognitoIdentityProviderASF (~> 2.24.0)
+    - AWSCore (~> 2.24.0)
+    - AWSMobileClient (~> 2.24.0)
+    - AWSPluginsCore (= 1.9.3)
+  - AmplifyPlugins/AWSS3StoragePlugin (1.9.3):
+    - AWSCore (~> 2.24.0)
+    - AWSPluginsCore (= 1.9.3)
+    - AWSS3 (~> 2.24.0)
+  - AWSAuthCore (2.24.1):
+    - AWSCore (= 2.24.1)
+  - AWSCognitoIdentityProvider (2.24.1):
+    - AWSCognitoIdentityProviderASF (= 2.24.1)
+    - AWSCore (= 2.24.1)
+  - AWSCognitoIdentityProviderASF (2.24.1)
+  - AWSCore (2.24.1)
+  - AWSMobileClient (2.24.1):
+    - AWSAuthCore (= 2.24.1)
+    - AWSCognitoIdentityProvider (= 2.24.1)
+    - AWSCognitoIdentityProviderASF (= 2.24.1)
+    - AWSCore (= 2.24.1)
+  - AWSPluginsCore (1.9.3):
+    - Amplify (= 1.9.3)
+    - AWSCore (~> 2.24.0)
+  - AWSS3 (2.24.1):
+    - AWSCore (= 2.24.1)
   - DKImagePickerController/Core (4.3.2):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
@@ -34,36 +84,73 @@ PODS:
     - DKImagePickerController/PhotoGallery
     - Flutter
   - Flutter (1.0.0)
+  - ObjectMapper (4.2.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
   - SwiftyGif (5.4.0)
 
 DEPENDENCIES:
+  - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/ios`)
+  - amplify_core (from `.symlinks/plugins/amplify_core/ios`)
+  - amplify_flutter (from `.symlinks/plugins/amplify_flutter/ios`)
+  - amplify_storage_s3 (from `.symlinks/plugins/amplify_storage_s3/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
 
 SPEC REPOS:
   trunk:
+    - Amplify
+    - AmplifyPlugins
+    - AWSAuthCore
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSMobileClient
+    - AWSPluginsCore
+    - AWSS3
     - DKImagePickerController
     - DKPhotoGallery
+    - ObjectMapper
     - SDWebImage
     - SwiftyGif
 
 EXTERNAL SOURCES:
+  amplify_auth_cognito:
+    :path: ".symlinks/plugins/amplify_auth_cognito/ios"
+  amplify_core:
+    :path: ".symlinks/plugins/amplify_core/ios"
+  amplify_flutter:
+    :path: ".symlinks/plugins/amplify_flutter/ios"
+  amplify_storage_s3:
+    :path: ".symlinks/plugins/amplify_storage_s3/ios"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
     :path: Flutter
 
 SPEC CHECKSUMS:
+  Amplify: b2cc6f4f1a5868c8f86ed54db09809bdabb2b34f
+  amplify_auth_cognito: 2e090a788d0ba4e08f6438170b1e7aac872782b4
+  amplify_core: 8b38d20089fe4f225c14db6892f586bd03824a42
+  amplify_flutter: d64b45e3a016e491bbb2e110fee57e150daf2164
+  amplify_storage_s3: 784469070ec70527454e540ef0d501498f58927a
+  AmplifyPlugins: 6f3021cbc2df2ee9ae8ee74072f49fadffc5af76
+  AWSAuthCore: a4400758dd1467e655bd859ee87aab1888ec9a4d
+  AWSCognitoIdentityProvider: ee2baffabe894407f5da7cd43aee7a0608680c24
+  AWSCognitoIdentityProviderASF: ffc62276197db5c41d8f7ce952443fb29e2967cc
+  AWSCore: f6cfada8b48d569c11b94e49e8fb184b9c1a2e7e
+  AWSMobileClient: b39ba2044701c4d013814bab148550d10b47f8b3
+  AWSPluginsCore: b88a0d6b56eb9dc16d627bd48522cc40d5a8971e
+  AWSS3: e5b5a1595e08c52bb321495d7122e1d331134317
   DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 8baa96de485bcb0aea5a26510e6a7160d93feee8
 
 COCOAPODS: 1.10.1

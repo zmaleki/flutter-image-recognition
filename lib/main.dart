@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:imagerecognition/single_image.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:amplify_storage_s3/amplify_storage_s3.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
+import './amplify/amplifyconfiguration.dart';
 import 'dart:io';
 
 void main() {
@@ -31,10 +35,29 @@ class MyApp extends StatefulWidget {
 class _MyHomePageState extends State<MyApp> {
   bool _isAmplifyConfigured = false;
   final List<String> _files = <String>['assets/images/image2.jpeg'];
-  final List<String> _fileNames = <String>['assets/images/image2.jpeg'];
+  final List<String> _fileNames = <String>['image2.jpeg'];
 
   void initState() {
     super.initState();
+  }
+
+  void configureAmplify() async {
+    // First add plugins (Amplify native requirements)
+    AmplifyStorageS3 storage = new AmplifyStorageS3();
+    AmplifyAuthCognito auth = new AmplifyAuthCognito();
+    Amplify.addPlugins([auth, storage]);
+
+    try {
+      // Configure
+      await Amplify.configure(amplifyconfig);
+    } on AmplifyAlreadyConfiguredException {
+      print(
+          'Amplify was already configured. Looks like app restarted on android.');
+    }
+
+    setState(() {
+      _isAmplifyConfigured = true;
+    });
   }
 
   void upload() async {
@@ -46,16 +69,14 @@ class _MyHomePageState extends State<MyApp> {
       print(fileResult);
       File local = File(fileResult?.files.single.path ?? "");
       final key = fileResult?.files.single.name;
-      // print("Upload File key: ${key}");
 
-      // print("Upload File local: ${local.path}");
-      // Map<String, String> metadata = <String, String>{};
-      // metadata['name'] = 'filename';
-      // metadata['desc'] = 'A test file';
-      // S3UploadFileOptions options = S3UploadFileOptions(
-      //     accessLevel: StorageAccessLevel.guest, metadata: metadata);
-      // await Amplify.Storage.uploadFile(
-      //     key: key, local: local, options: options);
+      Map<String, String> metadata = <String, String>{};
+      metadata['name'] = 'filename';
+      metadata['desc'] = 'A test file';
+      S3UploadFileOptions options = S3UploadFileOptions(
+          accessLevel: StorageAccessLevel.guest, metadata: metadata);
+      await Amplify.Storage.uploadFile(
+          key: key, local: local, options: options);
       print("key${key}");
       setState(() {
         _files.add(local.path);
@@ -68,6 +89,7 @@ class _MyHomePageState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    _isAmplifyConfigured ? null : configureAmplify();
     return MaterialApp(
       home: Builder(
         builder: (context) => Center(
@@ -125,7 +147,7 @@ class _MyHomePageState extends State<MyApp> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: upload,
-              tooltip: 'Increment',
+              tooltip: 'upload',
               child: Icon(Icons.add),
             ),
           ),
