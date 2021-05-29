@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-// import 'result.dart';
 
 analyseFunction(String imageName) async {
   try {
@@ -27,37 +26,37 @@ analyseFunction(String imageName) async {
             detectedText + body['details'][i]['DetectedText'] + " \n";
       }
     }
-    // var firstItem = body['details'][0];
-    // return firstItem['DetectedText'];
     return detectedText;
   } catch (e) {
     return "Could not analyse the text!";
   }
-  // return result;
 }
 
 class RecognitionResult extends StatefulWidget {
   final imageName;
-  // SecondRoute({key, this.imageName}) : super(key: key);
+  final imagePath;
   const RecognitionResult({
     this.imageName,
+    this.imagePath,
     Key? key,
   }) : super(key: key);
 
   @override
   _RecognitionResultState createState() =>
-      _RecognitionResultState(imageName: imageName);
+      _RecognitionResultState(imageName: imageName, imagePath: imagePath);
 }
 
 class _RecognitionResultState extends State<RecognitionResult> {
   String _result = "initializing...\n";
   final imageName;
-  _RecognitionResultState({
-    this.imageName,
-  }) : super();
+  final imagePath;
+  _RecognitionResultState({this.imageName, this.imagePath}) : super();
 
   @override
   Widget build(BuildContext context) {
+    print("imageName: ${imageName}");
+    print("imagePath: ${imagePath}");
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Analyse your image"),
@@ -68,7 +67,7 @@ class _RecognitionResultState extends State<RecognitionResult> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                image: AssetImage('assets/images/$imageName'),
+                image: AssetImage(imagePath),
                 width: 300,
                 height: 300,
               ),
